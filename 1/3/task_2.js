@@ -1,4 +1,9 @@
 function task2(list) {
+    for (let a of list) {
+        if (typeof a !== "Number" && Number.isInteger(a) && a > 0) {
+            return undefined
+        }
+    }
     return list.map(function(elem) {
         return elem % 5;
     });
