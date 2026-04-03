@@ -22,12 +22,9 @@
         </tr>
     </table>
 
-    <!-- DOM-защита -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             document.body.style.userSelect = 'none';
-            document.body.style.webkitUserSelect = 'none'; // хром
-            document.body.style.mozUserSelect = 'none'; // фаерфокс
 
             document.addEventListener('contextmenu', function(e) {
                 e.preventDefault();
@@ -42,10 +39,6 @@
             });
 
             document.addEventListener('selectstart', function(e) {
-                e.preventDefault();
-            });
-
-            document.addEventListener('dragstart', function(e) {
                 e.preventDefault();
             });
         });

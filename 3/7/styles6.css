@@ -42,4 +42,8 @@ nav a { margin: 0 10px; }
 	justify-content: center;
 }
 
-footer { background: #eee; padding: 20px; text-align: center; }
+footer { 
+	background: #eee; 
+	padding: 20px; 
+	text-align: center;
+}

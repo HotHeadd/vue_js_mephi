@@ -82,7 +82,7 @@
             const priority = { '+': 1, '-': 1, '*': 2, '/': 2 };
 
             for (let token of tokens) {
-                if (!isNaN(token)) { // если число
+                if (Number.isFinite(num)) { // если число
                     output.push(parseFloat(token));
                 } 
                 else if (token in priority) {

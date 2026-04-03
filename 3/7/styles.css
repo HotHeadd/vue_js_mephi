@@ -25,10 +25,9 @@ body { padding-top: 48px; }
   background: #fff;
   display: flex; gap: 1.5rem;
   padding: 1rem;
-  z-index: 100;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #312a2a;
 }
-.top a { color: #000; text-decoration: none; }
+.top a { color: #000; }
 
 /* Задание 4-5 */
 .circle {
