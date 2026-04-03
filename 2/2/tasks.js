@@ -49,6 +49,9 @@ function User2(name, age) {
 // Задание 5
 class Student extends User {
 	#knowledge = 0
+	constructor(name, age) {
+		super()
+	}
 	hello() {
 		console.log(`Hello, my name is ${this.name}. I am ${this.age} years old. And I am a student!`)
 	}

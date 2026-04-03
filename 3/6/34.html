@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Кликер</title>
+</head>
+<body>
+    <button id="btn">Клик</button>
+    <p>Клики: <span id="clicks">0</span></p>
+    <p>Средняя скорость: <span id="avg">0</span> кликов/сек</p>
+
+    <script>
+        const STORAGE_KEY = 'clicker';
+        const clicksEl = document.getElementById('clicks');
+        const avgEl = document.getElementById('avg');
+        const btn = document.getElementById('btn');
+
+        let data = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {
+            clicks: 0,
+            startTime: Date.now()
+        };
+
+        function update() {
+            clicksEl.textContent = data.clicks;
+            
+            const elapsedSec = (Date.now() - data.startTime) / 1000;
+            const avg = elapsedSec > 0 ? (data.clicks / elapsedSec).toFixed(2) : 0;
+            avgEl.textContent = avg;
+        }
+
+        btn.addEventListener('click', () => {
+            data.clicks++;
+            save();
+            update();
+        });
+
+        function save() {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+        }
+
+        setInterval(update, 1000);
+        update();
+    </script>
+</body>
+</html>

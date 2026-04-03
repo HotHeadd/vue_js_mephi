@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Калькулятор</title>
+</head>
+<body>
+    <input type="text" id="display" readonly size="20"><br><br>
+
+    <button onclick="inputChar('1')">1</button>
+    <button onclick="inputChar('2')">2</button>
+    <button onclick="inputChar('3')">3</button>
+    <button onclick="inputChar('/')">/</button><br>
+    
+    <button onclick="inputChar('4')">4</button>
+    <button onclick="inputChar('5')">5</button>
+    <button onclick="inputChar('6')">6</button>
+    <button onclick="inputChar('*')">*</button><br>
+    
+    <button onclick="inputChar('7')">7</button>
+    <button onclick="inputChar('8')">8</button>
+    <button onclick="inputChar('9')">9</button>
+    <button onclick="inputChar('-')">-</button><br>
+    
+    <button onclick="inputChar('(')">(</button>
+    <button onclick="inputChar('0')">0</button>
+    <button onclick="inputChar(')')">)</button>
+    <button onclick="inputChar('+')">+</button><br>
+
+    <button onclick="calc()">=</button>
+    <button onclick="clr()">C</button>
+
+    <script>
+        let display = document.getElementById('display');
+        let expr = '';
+
+        function inputChar(ch) {
+            expr += ch;
+            display.value = expr;
+        }
+
+        function clr() {
+            expr = '';
+            display.value = '';
+        }
+
+        function calc() {
+            try {
+                let clean = expr.replace(/\s/g, ''); // удаляем пробельные символы
+                clean = clean.replace(/(^|[(])-/g, '$10-'); // меняем унарные минусы на бинарные $1 -- первая группа захвата
+
+                const tokens = tokenize(clean);
+                
+                const rpn = toRPN(tokens);
+                
+                const result = evalRPN(rpn);
+                
+                const formatted = Number.isInteger(result) ? result.toString() : parseFloat(result.toFixed(10)).toString();
+                
+                display.value = formatted;
+                expr = formatted;
+            } catch (e) {
+                display.value = 'Ошибка';
+                expr = '';
+            }
+        }
+
+        function tokenize(str) {
+            const tokens = [];
+            const regex = /(\d+\.?\d*|[+\-*/()])/g; // регекс для захвата одного токена (число, оператор, скобочка), g -- все матчи
+            let match;
+            while ((match = regex.exec(str)) !== null) {
+                tokens.push(match[0]);
+            }
+            return tokens;
+        }
+
+        function toRPN(tokens) {
+            const output = [];
+            const stack = [];
+            const priority = { '+': 1, '-': 1, '*': 2, '/': 2 };
+
+            for (let token of tokens) {
+                if (!isNaN(token)) { // если число
+                    output.push(parseFloat(token));
+                } 
+                else if (token in priority) {
+                    while (stack.length > 0) {
+                        const top = stack[stack.length - 1];
+                        if (top === '(') break;
+                        if (priority[top] >= priority[token]) {
+                            output.push(stack.pop());
+                        } else {
+                            break;
+                        }
+                    }
+                    stack.push(token);
+                } 
+                else if (token === '(') {
+                    stack.push(token);
+                } 
+                else if (token === ')') {
+                    while (stack.length > 0 && stack[stack.length - 1] !== '(') {
+                        output.push(stack.pop());
+                    }
+                    if (stack.length === 0) throw new Error("Mismatched parentheses");
+                    stack.pop(); // pop (
+                }
+            }
+            while (stack.length > 0) {
+                const top = stack.pop();
+                if (top === '(' || top === ')') throw new Error("Mismatched parentheses");
+                output.push(top);
+            }
+            return output;
+        }
+
+        function evalRPN(rpn) {
+            const stack = [];
+            for (let token of rpn) {
+                if (typeof token === 'number') {
+                    stack.push(token);
+                } else {
+                    const b = stack.pop();
+                    const a = stack.pop();
+                    if (a === undefined || b === undefined) throw new Error("Invalid expression");
+                    
+                    switch(token) {
+                        case '+': stack.push(a + b); break;
+                        case '-': stack.push(a - b); break;
+                        case '*': stack.push(a * b); break;
+                        case '/':
+                            if (b === 0) throw new Error("Division by zero");
+                            stack.push(a / b);
+                            break;
+                    }
+                }
+            }
+            if (stack.length !== 1) throw new Error("Invalid expression");
+            return stack[0];
+        }
+    </script>
+</body>
+</html>

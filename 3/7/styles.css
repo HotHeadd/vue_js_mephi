@@ -1,0 +1,46 @@
+/* Задание 2 */
+.device-label span {
+  display: none;
+}
+
+@media (max-width: 767px) { 
+  .device-label .mobile { display: inline; }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .device-label .tablet { display: inline; }
+}
+
+@media (min-width: 1024px) {
+  .device-label .desktop { display: inline; }
+}
+
+/* Задание 3 */
+
+body { padding-top: 48px; }
+
+.top {
+  position: fixed;
+  top: 0; left: 0; width: 100%;
+  background: #fff;
+  display: flex; gap: 1.5rem;
+  padding: 1rem;
+  z-index: 100;
+  border-bottom: 1px solid #ddd;
+}
+.top a { color: #000; text-decoration: none; }
+
+/* Задание 4-5 */
+.circle {
+  width: 60px; height: 60px;
+  background: blue;
+  border-radius: 50%;
+}
+.moving {
+  position: fixed; top: 0; left: 0;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+.static {
+  position: relative;
+}

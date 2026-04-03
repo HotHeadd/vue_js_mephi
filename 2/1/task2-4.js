@@ -1,6 +1,9 @@
 /*
 ссылки на свиней
 https://shorturl.at/xvo8U,https://shorturl.at/vxWBQ,https://shorturl.at/7ZSSa,https://shorturl.at/avwAB,https://shorturl.at/n2FFn
+
+без забаганной
+https://shorturl.at/xvo8U,https://shorturl.at/vxWBQ,https://shorturl.at/7ZSSa,https://shorturl.at/avwAB,https://shorturl.at/aNcGo
 */
 
 // ЗАДАНИЕ 2

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Добро пожаловать</title>
+</head>
+<body>
+    <h1>Добро пожаловать!</h1>
+    
+    <p><i>Приветствуем </i> <u>вас</u> <b>в нашем</b> <a href="http:\\example.com">магазине</a>!</p>
+    
+    <p>&lt;h1&gt;Теорема Пифагора&lt;/h1&gt;: <var>c<sup>2</sup> = a<sup>2</sup> + b<sup>2</sup></var></p>
+    
+    <table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse;">
+        <tr>
+            <td colspan="2">Информация</td>
+        </tr>
+        <tr>
+            <td>Старая цена: <s>1000</s> ₽</td>
+            <td>Новая цена: 500 ₽</td>
+        </tr>
+    </table>
+
+    <!-- DOM-защита -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.body.style.userSelect = 'none';
+            document.body.style.webkitUserSelect = 'none'; // хром
+            document.body.style.mozUserSelect = 'none'; // фаерфокс
+
+            document.addEventListener('contextmenu', function(e) {
+                e.preventDefault();
+            });
+
+            document.addEventListener('copy', function(e) {
+                e.preventDefault();
+            });
+
+            document.addEventListener('cut', function(e) {
+                e.preventDefault();
+            });
+
+            document.addEventListener('selectstart', function(e) {
+                e.preventDefault();
+            });
+
+            document.addEventListener('dragstart', function(e) {
+                e.preventDefault();
+            });
+        });
+    </script>
+</body>
+</html>

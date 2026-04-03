@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лабораторная работа 3 - CSS</title>
+	<link rel="stylesheet" href="styles.css">
+	<style>
+		.rainbow .red  { color: red; }
+		.rainbow .blue { color: blue; }
+	</style>
+</head>
+<body>
+    <h1>Добро пожаловать!</h1>
+    
+	<p class="rainbow">
+        <span id="f1">Приветствуем</span>
+        <u><span id="f2">вас</span></u> 
+        <b><span id="f3">в нашем</span></b> 
+        <a href="http:\\example.com">магазине</a>
+    </p>
+    
+	<p>&lt;h1&gt;<span style="font-family: 'Comic Sans MS';">Теорема Пифагора</span>&lt;/h1&gt;: <i>c<sup>2</sup> = a<sup>2</sup> + b<sup>2</sup></i></p>
+    
+    <table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse; background-color: cyan;">
+        <tr>
+            <td colspan="2">Информация</td>
+        </tr>
+        <tr>
+            <td>Старая цена: <s>1000</s> ₽</td>
+            <td>Новая цена: 500 ₽</td>
+        </tr>
+    </table>
+
+	<script>
+		let index = 0;
+		const cls = [
+			document.getElementById("f1"),
+			document.getElementById("f2"),
+			document.getElementById("f3")
+		];
+
+		cls.forEach((el) => {
+			const text = el.textContent;
+			const fragment = document.createDocumentFragment();
+			
+			for (let char of text) {
+				if (char.trim() === '') {
+					fragment.appendChild(document.createTextNode(char));
+					continue;
+				}
+				const span = document.createElement('span');
+				span.textContent = char;
+				span.classList.add(index % 2 === 0 ? 'red' : 'blue');
+				fragment.appendChild(span);
+				index++;
+			}
+			el.parentNode.replaceChild(fragment, el);
+		});
+	</script>
+
+	<h2>Задание 2</h2>
+	<div class="device-label">
+		<span class="mobile">Mobile</span>
+		<span class="tablet">Tablet</span>
+		<span class="desktop">Desktop</span>
+	</div>
+
+	<!-- Задание 3 -->
+	<nav class="top">
+	<a href="#">Главная</a>
+	<a href="#">Каталог</a>
+	<a href="#">Контакты</a>
+	<a href="#">О нас</a>
+	</nav>
+
+	<h2>Задание 4</h2>
+	<!-- Задание 4 -->
+	<div class="circle static"></div>
+	<!-- Задание 5 -->
+	<div class="circle moving"></div>
+	<script>
+		document.addEventListener('mousemove', e => {
+		const c = document.querySelector('.moving');
+		c.style.left = e.clientX + 'px';
+		c.style.top = e.clientY + 'px';
+		});
+	</script>
+
+</nav>
+</body>
+</html>
