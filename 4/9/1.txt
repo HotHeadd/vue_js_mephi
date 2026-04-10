@@ -1,0 +1,6 @@
+npm install -g tsc
+npx tsc 9/2.ts --watch
+
+
+Запуск ts 
+npx tsx 9/2.ts

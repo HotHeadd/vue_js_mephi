@@ -1,0 +1,2 @@
+npm install -g sass  
+sass 8/4.sass 8/4.css --no-source-map
