@@ -1,6 +1,6 @@
 // СТРАТЕГИЯ НА ПРИМЕРЕ РАЗНЫХ АТАК У БАШНИ
 interface IAttack {
-  hit(enemyHp: number): number;
+  	hit(enemyHp: number): number;
 }
 
 class SingleAttack implements IAttack {
@@ -18,15 +18,15 @@ class SplashAttack implements IAttack {
 }
 
 class Tower {
-  constructor(private attack: IAttack) {}
+    constructor(private attack: IAttack) {}
   
-  setAttack(attack: IAttack): void {
-    this.attack = attack;
-  }
+  	setAttack(attack: IAttack): void {
+    	this.attack = attack;
+  	}
   
-  shoot(enemyHp: number): number {
-    return this.attack.hit(enemyHp);
-  }
+  	shoot(enemyHp: number): number {
+    	return this.attack.hit(enemyHp);
+  	}
 }
 console.log("СТРАТЕГИЯ")
 const cannon = new Tower(new SingleAttack(50));
@@ -64,23 +64,23 @@ class GameEventBus implements ISubject<GameEvent> {
 }
 
 class AchievementManager implements IObserver<GameEvent> {
-  private unlocked: Set<string> = new Set();
+	private unlocked: Set<string> = new Set();
 
-  onNotify(event: GameEvent): void {
-    if (event.type === 'kill' && event.count >= 10) {
-      this.tryUnlock('Sharpshooter', '10 врагов уничтожено');
-    }
-    if (event.type === 'wave' && event.level >= 5) {
-      this.tryUnlock('Survivor', 'Пройдена 5-я волна');
-    }
-  }
+	onNotify(event: GameEvent): void {
+		if (event.type === 'kill' && event.count >= 10) {
+			this.tryUnlock('Sharpshooter', '10 врагов уничтожено');
+		}
+		if (event.type === 'wave' && event.level >= 5) {
+			this.tryUnlock('Survivor', 'Пройдена 5-я волна');
+		}
+	}
 
-  private tryUnlock(id: string, description: string): void {
-    if (!this.unlocked.has(id)) {
-      this.unlocked.add(id);
-      console.log(`Достижение разблокировано: [${id}] - ${description}`);
-    }
-  }
+	private tryUnlock(id: string, description: string): void {
+		if (!this.unlocked.has(id)) {
+			this.unlocked.add(id);
+			console.log(`Достижение разблокировано: [${id}] - ${description}`);
+		}
+	}
 }
 
 console.log("НАБЛЮДАТЕЛЬ")
